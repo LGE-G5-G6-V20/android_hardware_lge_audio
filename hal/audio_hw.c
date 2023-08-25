@@ -992,19 +992,19 @@ static void set_ess_backend(snd_device_t snd_device){
     if (property_get_bool("ro.audio.ess.supported",false) == true) {
         if (snd_device == SND_DEVICE_OUT_HEADPHONES) {
         ALOGD("%s: Restoring WCD backend \n", __func__);
-        platform_set_snd_device_backend(SND_DEVICE_OUT_HEADPHONES, "headphones", "SLIMBUS_6_RX");  //Needed as a workaround, refer to main func.
+        platform_set_snd_device_backend(snd_device, "headphones", "SLIMBUS_6_RX");  //Needed as a workaround, refer to main func.
         }
         else if (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC) {
         ALOGD("%s: Setting ESS hifi backend \n", __func__); 
-        //platform_set_snd_device_backend(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC, "ess-headphones-hifi", "SEC_MI2S_RX");  ESS backend is broken it seems. Causes pcm_prepare to return -1
+        platform_set_snd_device_backend(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
         }
         else if (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED) {
         ALOGD("%s: Setting ESS hifi advanced backend \n", __func__); 
-        //platform_set_snd_device_backend(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX, "ess-headphones-hifi-advanced", "SEC_MI2S_RX"); ESS backend is broken it seems. Causes pcm_prepare to return -1
+        platform_set_snd_device_backend(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
         }
         else if (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX) {
         ALOGD("%s: Setting ESS hifi aux backend \n", __func__); 
-        //platform_set_snd_device_backend(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX, "ess-headphones-hifi-aux", "SEC_MI2S_RX"); ESS backend is broken it seems. Causes pcm_prepare to return -1
+        platform_set_snd_device_backend(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
         }
         else { ALOGD("%s: Not an ess hifi scenario \n", __func__); }
         }
