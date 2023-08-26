@@ -3523,13 +3523,13 @@ int platform_get_backend_index(snd_device_t snd_device)
                 else if (strncmp(backend_tag_table[snd_device], "headphones",
                             sizeof("headphones")) == 0)
                         port = HEADPHONE_BACKEND;
-                else if (strncmp(backend_tag_table[snd_device], "ess-headphones-hifi",
+                else if (strncmp(backend_tag_table[snd_device], "headphones tert-mi2s-headphones",
                             sizeof("ess-headphones-hifi")) == 0)
                         port = ESS_HEADPHONE_BACKEND;
-                else if (strncmp(backend_tag_table[snd_device], "ess-headphones-hifi-advanced",
+                else if (strncmp(backend_tag_table[snd_device], "headphones tert-mi2s-headphones",
                             sizeof("ess-headphones-hifi-advanced")) == 0)
                         port = ESS_HEADPHONE_BACKEND;
-                else if (strncmp(backend_tag_table[snd_device], "ess-headphones-hifi-aux",
+                else if (strncmp(backend_tag_table[snd_device], "headphones tert-mi2s-headphones",
                             sizeof("ess-headphones-hifi-aux")) == 0)
                         port = ESS_HEADPHONE_BACKEND;
                 else if (strcmp(backend_tag_table[snd_device], "hdmi") == 0)

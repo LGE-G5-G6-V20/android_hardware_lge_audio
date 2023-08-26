@@ -984,10 +984,6 @@ int pcm_ioctl(struct pcm *pcm, int request, ...)
     return ioctl(pcm_fd, request, arg);
 }
 
-//static void set_ess_sampling_rate(){} TODO: Trigger ess routing when >48khz sampling rate detected. This function will also allow userspace control of S.R on ess
-
-//static void set_ess_bitrate(){} TODO: Trigger ess when bitrate >16. This function will also allow userspace control of Bitrate on ess. 
-
 static void set_ess_backend(snd_device_t snd_device){
     if (property_get_bool("ro.audio.ess.supported",false) == true) {
         if (snd_device == SND_DEVICE_OUT_HEADPHONES) {
@@ -996,15 +992,15 @@ static void set_ess_backend(snd_device_t snd_device){
         }
         else if (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC) {
         ALOGD("%s: Setting ESS hifi backend \n", __func__); 
-        platform_set_snd_device_backend(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
+        platform_set_snd_device_backend(snd_device, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
         }
         else if (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED) {
         ALOGD("%s: Setting ESS hifi advanced backend \n", __func__); 
-        platform_set_snd_device_backend(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_ADVANCED, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
+        platform_set_snd_device_backend(snd_device, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
         }
         else if (snd_device == SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX) {
         ALOGD("%s: Setting ESS hifi aux backend \n", __func__); 
-        platform_set_snd_device_backend(SND_DEVICE_OUT_HEADPHONES_HIFI_DAC_AUX, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
+        platform_set_snd_device_backend(snd_device, "headphones tert-mi2s-headphones", "SEC_MI2S_RX");
         }
         else { ALOGD("%s: Not an ess hifi scenario \n", __func__); }
         }
