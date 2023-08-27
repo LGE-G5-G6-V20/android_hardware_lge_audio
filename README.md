@@ -1,22 +1,22 @@
-So, what is this you may be asking -- well, this is a modified open source audio hal that is designed to work for lg devices which feature an ess dac. This takes a different approach from stock, which contained all of the additional dac control functions within the hal. My approach is different from theirs. The goal of my approach is to let the hal just handle the audio routing and modify the ess driver to expose sysfs nodes, of which will be manipulated and controlled through scripts, controlled by my added properties. This could also theoretically be used for other devices which use a dac, however I do not care about porting it to said devices.
+So, what is this you may be asking -- well, this is a modified open source audio hal that is designed to work for lg devices which feature an ess dac. This hal can theoretically work for other devices which feature a dac
+on the msm8996/msm8998 platform. To trigger the ess dac, audio must be paused for 3-5 seconds, after which the dac routes will kick in.
 
-Working features:
--Audio routing
+Features:
 
-WIP features: 
--AVC volume
--High impedence
--Adjustable bitrate
--Adjustable filters
--Adjustable presets
+-Automatic route/backend switching
+
+-Dac status
+
+-Native support for upto 3 dac routes
+
+-Allows for both WCDxxxx and dac operation
+
+-Doesn't rely on any stock relics or hacks to function.
+
+Note:
+Requires dac panel to interface with the hal. (i suppose you could create your own way to mess with the props, up to you)
+https://github.com/LGE-G5-G6-V20/android_hardware_lge/tree/lineage-20/dac_panel
+
 
 Tested on:
-V20 - es9218P
-
-Needed commits:(Bound to change over time)
-
-https://github.com/LGE-G5-G6-V20/android_device_lge_v20-common/commit/148fc99ae3a8e7012546403f846ff5fe2ab523e9
-
-https://github.com/LGE-G5-G6-V20/android_device_lge_v20-common/commit/df42f3e6f435ba92e6d350ecadda548204eede89
-
-https://github.com/LGE-G5-G6-V20/android_device_lge_msm8996-common/commit/9c0ddca14afa6264cd244c201366b88fdb8aa4e1
+V20 - es9218
