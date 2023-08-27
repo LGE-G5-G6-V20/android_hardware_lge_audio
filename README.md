@@ -9,7 +9,18 @@ Features:
 
 -Dac status
 
--Native support for upto 3 dac routes
+-Native support for upto 5 dac "modes" (really just routes in the eyes of the hal)
+
+    -NORMAL
+  
+    -HIGH IMPEDANCE
+  
+    -AUX HIGH IMPEDANCE (refer to ess datasheet for difference about H.Imp & aux H.Imp)
+  
+    -24 BIT HIGH IMPEDANCE
+  
+    -24 BIT AUX HIGH IMPEDANCE
+  
 
 -Allows for both WCDxxxx and dac operation
 
