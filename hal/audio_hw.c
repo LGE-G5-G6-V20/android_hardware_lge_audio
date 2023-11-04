@@ -6961,6 +6961,7 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
     int val;
     int ret;
     int status = 0;
+    bool previous_ess_status = false;
     struct listnode *node;
     struct audio_usecase *usecase = NULL;
 
@@ -7154,6 +7155,30 @@ static int adev_set_parameters(struct audio_hw_device *dev, const char *kvpairs)
             us_stop();
         }
     }
+    
+    if(property_get_bool("ro.audio.ess.supported",false) == true){
+    struct audio_usecase *usecase;
+    struct listnode *node;
+        //keep the previous state so we cana compare it later
+        if (previous_ess_status != property_get_bool("persist.audio.hifi.enabled",false)){ 
+        previous_ess_status = property_get_bool("persist.audio.hifi.enabled",false);
+        }
+        list_for_each(node, &adev->usecase_list) {
+            usecase = node_to_item(node, struct audio_usecase, list);
+            if (usecase->out_snd_device == SND_DEVICE_OUT_HEADPHONES){
+		if (property_get_bool("persist.audio.hifi.enabled",false) != previous_ess_status) {
+		    ALOGD("ESS hifi status changed, reconfiguring...");
+		    pthread_mutex_unlock(&adev->lock);
+                    lock_output_stream(usecase->stream.out);
+                    pthread_mutex_lock(&adev->lock);
+		    select_devices(adev, usecase->id);
+		    pthread_mutex_unlock(&usecase->stream.out->lock);
+		} 
+	    }
+        }
+    }
+		    
+            
 
     amplifier_set_parameters(parms);
     audio_extn_set_parameters(adev, parms);
