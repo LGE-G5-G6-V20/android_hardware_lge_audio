@@ -1,4 +1,6 @@
-So, what is this you may be asking -- well, this is a modified open source audio hal that is designed to work for lg devices which feature an ess dac. This hal can theoretically work for other devices which feature a dac
+This is a modified open source audio hal that is designed to work for lg devices which feature an ess dac. 
+This hal can theoretically work for other devices which feature a dac
+
 on the msm8996/msm8998 platform. To trigger the ess dac, audio must be paused for 3-5 seconds, after which the dac routes will kick in.
 
 Features:
